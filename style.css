@@ -102,10 +102,12 @@ nav ul li a:hover {
     flex: 1.2;
 }
 
-.hero-img {
+.hero-visual {
     flex: 0.8;
     display: flex;
     justify-content: center;
+    position: relative;
+    perspective: 1000px;
 }
 
 .hero .hero-text h1 {
@@ -168,13 +170,170 @@ nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.hero-img img {
-    width: 320px;
-    max-width: 100%;
-    height: auto;
-    border-radius: 30px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+/* Terminal Visual Styles */
+.terminal-window {
+    width: 100%;
+    max-width: 450px;
+    background-color: #0c111a;
+    border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    z-index: 2;
+    transform: rotateY(-10deg) rotateX(5deg);
+    transition: transform 0.5s ease;
+    animation: float 6s ease-in-out infinite;
+}
+
+.terminal-window:hover {
+    transform: rotateY(0deg) rotateX(0deg);
+}
+
+.terminal-header {
+    background-color: #1a212d;
+    padding: 10px 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-buttons span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.close-btn {
+    background-color: #FF5F56;
+}
+
+.min-btn {
+    background-color: #FFBD2E;
+}
+
+.max-btn {
+    background-color: #27C93F;
+}
+
+.terminal-title {
+    flex: 1;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-family: monospace;
+    margin-right: 44px;
+}
+
+.terminal-body {
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.terminal-line {
+    margin-bottom: 8px;
+    color: #e6e6e6;
+}
+
+.terminal-line .prompt {
+    color: #89FC00;
+    margin-right: 8px;
+}
+
+.terminal-line.output {
+    color: #a0aabf;
+}
+
+.terminal-line.success {
+    color: #4CC9F0;
+}
+
+.terminal-line.loading span {
+    animation: blink 1.5s infinite;
+}
+
+.terminal-line.loading span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.terminal-line.loading span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.cursor {
+    display: inline-block;
+    width: 8px;
+    background-color: #e6e6e6;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateY(-10deg) rotateX(5deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotateY(-10deg) rotateX(5deg);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.glow-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(137, 252, 0, 0.15) 0%, rgba(219, 48, 105, 0.15) 50%, transparent 70%);
+    z-index: 1;
+    filter: blur(40px);
+    animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
 }
 
 .marquee {
@@ -735,6 +894,50 @@ nav ul li a:hover {
     }
 }
 
+/* Hobbies section */
+.hobbies {
+    background-color: #04080F;
+    color: #FFFFFF;
+    padding: 6rem 5%;
+}
+
+.hobbies h2 {
+    font-size: 4rem;
+    margin-bottom: 4rem;
+    text-transform: lowercase;
+}
+
+.hobbies h2 .highlight {
+    color: #4CC9F0;
+}
+
+.spinning-wheel {
+    width: 100%;
+    max-width: 180px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 50%;
+    /* Ensures it looks like a clean wheel even if the image has a square background */
+    animation: spinWheel 20s linear infinite;
+}
+
+@keyframes spinWheel {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .hobbies h2 {
+        font-size: 3rem;
+    }
+}
+
 /* Contact section */
 .contact {
     background-color: #04080F;
@@ -812,6 +1015,16 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 4rem;
+    }
+
+    .hero .hero-text div {
+        justify-content: center;
+    }
+
     .contact h2 {
         font-size: 3rem;
     }
